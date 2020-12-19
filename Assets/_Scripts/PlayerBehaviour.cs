@@ -23,16 +23,22 @@ public class PlayerBehaviour : MonoBehaviour
 
     void start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Go back to Start Scene
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager manager = FindObjectOfType<SceneManager>();
+            manager.GoToScene("Start");
+        }
+
         _Fire();
         _Move();
     }
-
     private void _Move()
     {
         if (isGrounded)

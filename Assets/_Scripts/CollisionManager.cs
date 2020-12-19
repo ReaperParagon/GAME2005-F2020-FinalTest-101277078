@@ -181,7 +181,12 @@ public class CollisionManager : MonoBehaviour
                 // add the new contact
                 a.contacts.Add(contactB);
                 a.isColliding = true;
-                
+
+                // Response
+                if (b.gameObject.GetComponent<RigidBody3D>().bodyType == BodyType.DYNAMIC)
+                {
+                    ResponseAABB(a, contactB);
+                }
             }
         }
         else
@@ -199,5 +204,20 @@ public class CollisionManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public static void ResponseAABB(CubeBehaviour a, Contact b)
+    {
+        // Use Masses to Calculate Velocity
+        RigidBody3D aRB = a.gameObject.GetComponent<RigidBody3D>();
+        RigidBody3D bRB = b.cube.gameObject.GetComponent<RigidBody3D>();
+
+
+        // B's Velocity
+        bRB.velocity = ((bRB.mass - aRB.mass) / (bRB.mass + aRB.mass)) * bRB.velocity +
+                     ((2 * aRB.mass) / (bRB.mass + aRB.mass)) * aRB.velocity;
+
+        // Move out of Object
+        bRB.transform.position += b.face * b.penetration / 2;
     }
 }

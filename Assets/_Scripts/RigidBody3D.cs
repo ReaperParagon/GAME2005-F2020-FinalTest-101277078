@@ -40,7 +40,7 @@ public class RigidBody3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bodyType == BodyType.DYNAMIC)
+        if (bodyType == BodyType.DYNAMIC && Time.timeScale > 0.5f)
         {
             if (isFalling)
             {

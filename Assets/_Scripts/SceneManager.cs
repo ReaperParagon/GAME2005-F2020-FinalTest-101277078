@@ -9,6 +9,7 @@ public class SceneManager : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0.0f;
     }
 
     public void GoToScene(string scene)

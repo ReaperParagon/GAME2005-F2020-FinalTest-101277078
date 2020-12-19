@@ -36,9 +36,18 @@ public class PlayerBehaviour : MonoBehaviour
             manager.GoToScene("Start");
         }
 
-        _Fire();
-        _Move();
+        if(Time.timeScale > 0.5f)
+        {
+            _Fire();
+            _Move();
+        }
     }
+
+    public void _Activate()
+    {
+        Time.timeScale = 1.0f;
+    }
+
     private void _Move()
     {
         if (isGrounded)
